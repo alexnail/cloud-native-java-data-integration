@@ -5,11 +5,15 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>data-integration</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <properties>
+        <spring-cloud-dataflow.version>2.10.0</spring-cloud-dataflow.version>
+    </properties>
     <parent>
         <groupId>cnj</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
     <modules>
@@ -18,13 +22,37 @@
         <module>axon</module>
         <module>data-integration-it</module>
     </modules>
-    <build>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dataflow-rest-client</artifactId>
+                <version>${spring-cloud-dataflow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dataflow-shell</artifactId>
+                <version>${spring-cloud-dataflow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-dataflow-server-local</artifactId>
+                <version>1.7.4.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.integration</groupId>
+                <artifactId>spring-integration-java-dsl</artifactId>
+                <version>1.2.3.RELEASE</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.jfrog.buildinfo</groupId>
                 <artifactId>artifactory-maven-plugin</artifactId>
-                <version>2.4.0</version>
+                <version>3.5.1</version>
                 <inherited>false</inherited>
                 <executions>
                     <execution>
@@ -63,47 +91,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>libs-release</name>
-            <url>
-                https://cloudnativejava.artifactoryonline.com/cloudnativejava/libs-release
-            </url>
-        </repository>
-        <repository>
-            <snapshots/>
-            <id>snapshots</id>
-            <name>libs-snapshot</name>
-            <url>
-                https://cloudnativejava.artifactoryonline.com/cloudnativejava/libs-snapshot
-            </url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>plugins-release</name>
-            <url>
-                https://cloudnativejava.artifactoryonline.com/cloudnativejava/plugins-release
-            </url>
-        </pluginRepository>
-        <pluginRepository>
-            <snapshots/>
-            <id>snapshots</id>
-            <name>plugins-snapshot</name>
-            <url>
-                https://cloudnativejava.artifactoryonline.com/cloudnativejava/plugins-snapshot
-            </url>
-        </pluginRepository>
-    </pluginRepositories>
-
-
 </project>
